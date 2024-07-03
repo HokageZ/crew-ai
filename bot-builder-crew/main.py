@@ -3,15 +3,15 @@ load_dotenv()
 
 from crewai import Crew
 
-from tasks import GameTasks
-from agents import GameAgents
+from tasks import BotTasks
+from agents import BotAgents
 
-tasks = GameTasks()
-agents = GameAgents()
+tasks = BotTasks()
+agents = BotAgents()
 
-print("## Welcome to the Game Crew")
+print("## Welcome to the Bot Crew")
 print('-------------------------------')
-game = input("What is the game you would like to build? What will be the mechanics?\n")
+bot = input("What is the Discord Bot you would like to build?\n")
 
 # Create Agents
 senior_engineer_agent = agents.senior_engineer_agent()
@@ -19,9 +19,9 @@ qa_engineer_agent = agents.qa_engineer_agent()
 chief_qa_engineer_agent = agents.chief_qa_engineer_agent()
 
 # Create Tasks
-code_game = tasks.code_task(senior_engineer_agent, game)
-review_game = tasks.review_task(qa_engineer_agent, game)
-approve_game = tasks.evaluate_task(chief_qa_engineer_agent, game)
+code_bot = tasks.code_task(senior_engineer_agent, bot)
+review_bot = tasks.review_task(qa_engineer_agent, bot)
+approve_bot = tasks.evaluate_task(chief_qa_engineer_agent, bot)
 
 # Create Crew responsible for Copy
 crew = Crew(
@@ -31,9 +31,9 @@ crew = Crew(
 		chief_qa_engineer_agent
 	],
 	tasks=[
-		code_game,
-		review_game,
-		approve_game
+		code_bot,
+		review_bot,
+		approve_bot
 	],
 	verbose=True
 )
@@ -45,5 +45,5 @@ game = crew.kickoff()
 print("\n\n########################")
 print("## Here is the result")
 print("########################\n")
-print("final code for the game:")
-print(game)
+print("final code for the Bot:")
+print(bot)
