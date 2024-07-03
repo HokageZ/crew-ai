@@ -1,7 +1,7 @@
 from textwrap import dedent
 from crewai import Agent
 from langchain_groq import ChatGroq
-from tools.ExaSearchTool import ExaSearchTools
+from tools.ExaSearchTools import ExaSearchTool
 
 class BotAgents():
 
@@ -56,4 +56,4 @@ class BotAgents():
 		api_key="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",
 		model="mixtral-8x7b-32768"
 	)
-		self.tools=ExaSearchTools.tools() 
+		self.tools=ExaSearchTool.tools() 
