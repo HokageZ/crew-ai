@@ -1,7 +1,10 @@
 from textwrap import dedent
 from crewai import Agent
+from langchain_groq import ChatGroq
+from tools.ExaSearchTool import ExaSearchTools
 
 class BotAgents():
+
 	def senior_engineer_agent(self):
 		return Agent(
 			role='Senior Software Engineer',
@@ -11,9 +14,11 @@ class BotAgents():
 				Your expertise in programming in python. and do your best to
 				produce perfect code"""),
 			allow_delegation=False,
-			verbose=True
+			verbose=True,
+			llm = self.llm
 		)
-
+    
+  
 	def qa_engineer_agent(self):
 		return Agent(
 			role='Software Quality Control Engineer',
@@ -26,8 +31,10 @@ class BotAgents():
 				brackets and syntax errors.
   			You also check for security vulnerabilities, and logic errors"""),
 			allow_delegation=False,
-			verbose=True
+			verbose=True,			
+   			llm = self.llm
 		)
+
 
 	def chief_qa_engineer_agent(self):
 		return Agent(
@@ -37,5 +44,13 @@ class BotAgents():
 				You feel that programmers always do only half the job, so you are
 				super dedicate to make high quality code."""),
 			allow_delegation=True,
-			verbose=True
+			verbose=True,
+			llm = self.llm
 		)
+	
+	def __init__(self):
+		self.llm = ChatGroq(
+		api_key="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",
+		model="mixtral-8x7b-32768"
+	)
+		self.tools=ExaSearchTools.tools() 
